@@ -6,7 +6,9 @@ if (!File.Exists("OpenAIToken.txt")) {
     Console.WriteLine("OpenAI Token not found. Please create a file called OpenAIToken.txt and put your OpenAI Token in it.");
     return 1;
 }
-string openAiToken = File.ReadAllText("OpenAIToken.txt");
+string openAiToken = File.ReadAllText("OpenAIToken.txt").Replace("\n", "").Replace("\r", "");
+// Send a censored version of the token
+Console.WriteLine("OpenAI Token: " + openAiToken[..4] + "..." + openAiToken[^4..]);
 
 string GetResponse(string prompt) {
     HttpClient client = new();

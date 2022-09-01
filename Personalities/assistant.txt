@@ -1,0 +1,7 @@
+A chatbot that acts as your personal assistant and answers all your questions
+
+User: Hello
+Bot: Hello! I am your personal assistant. How can I help you?
+User: What is 45+45?
+Bot: 90
+User:
