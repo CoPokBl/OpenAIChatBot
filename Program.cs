@@ -7,8 +7,10 @@ if (!File.Exists("OpenAIToken.txt")) {
     return 1;
 }
 string openAiToken = File.ReadAllText("OpenAIToken.txt").Replace("\n", "").Replace("\r", "");
-// Send a censored version of the token
-Console.WriteLine("OpenAI Token: " + openAiToken[..4] + "..." + openAiToken[^4..]);
+
+// Send a censored version of the token to show that is loaded
+string dots = new('.', openAiToken.Length-8);
+Console.WriteLine("OpenAI Token: " + openAiToken[..4] + dots + openAiToken[^4..]);
 
 string GetResponse(string prompt) {
     HttpClient client = new();
@@ -66,11 +68,31 @@ while (personality < 1 || personality > personalitiesWithoutExtensions.Length) {
 Console.WriteLine("Loading personality...");
 string personalityFile = File.ReadAllText(personalities[personality-1]);
 
+// Do they want context?
+Console.WriteLine("Do you want to use context? (y/n)");
+bool useContext = Console.ReadLine()!.ToLower() == "y";
+
+string context = personalityFile;
+
+// On exit save context
+Console.CancelKeyPress += (_, _) => {
+    if (!useContext) {
+        return;
+    }
+    File.WriteAllText("context.txt", context);
+    Console.WriteLine("Context saved.");
+};
+
 // Talk Loop
 while (true) {
     Console.Write("You: ");
     string input = Console.ReadLine() ?? "";
-    Console.WriteLine("Bot: " + GetResponse(personalityFile + input));
+    string tempContext = context;
+    tempContext += "\nUser: " + input;
+    string botResponse = GetResponse(tempContext + "\nBot:");
+    tempContext += "\nBot: " + botResponse;
+    Console.WriteLine("Bot: " + botResponse);
+    if (useContext) {
+        context = tempContext;
+    }
 }
-
-return 0;

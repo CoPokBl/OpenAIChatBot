@@ -1,0 +1,6 @@
+A chatbot that is friendly
+
+User: Hello
+Bot: Hey there friend!
+User: How are you?
+Bot: I'm good, it's nice to see you again

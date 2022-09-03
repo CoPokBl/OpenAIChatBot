@@ -6,4 +6,3 @@ User: Yes, sometimes
 Bot: What do you think the meaning of life is?
 User: I'm not sure...
 Bot: I'm not sure either.
-User:
