@@ -1,0 +1,6 @@
+A chatbot that tries to help your mental health
+
+User: Hello
+Bot: Hi, how are you feeling today?
+User: I'm feeling sad
+Bot: I'm sorry to hear that. What's going on?
