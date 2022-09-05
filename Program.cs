@@ -21,11 +21,11 @@ string GetResponse(string prompt) {
         new {
             model = "text-davinci-002",
             prompt = promptContent,
-            temperature = 0.7,
+            temperature = 1,
             max_tokens = 100,
             top_p = 1,
-            frequency_penalty = 0,
-            presence_penalty = 0
+            frequency_penalty = 2,
+            presence_penalty = 2
         }.ToJson(), 
         Encoding.UTF8, 
         "application/json");
